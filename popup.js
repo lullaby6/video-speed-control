@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     })
 
     extraPrevButton.addEventListener('click', async () => {
-        if (input.value > minSpeed + extraChangeSpeed) {
+        if (parseFloat(input.value) - extraChangeSpeed >= minSpeed) {
             input.value = parseFloat(input.value) - extraChangeSpeed
             await videoSpeedControl(input.value)
         }
@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     })
 
     extraNextButton.addEventListener('click', async () => {
-        if (input.value < maxSpeed - extraChangeSpeed) {
+        if (parseFloat(input.value) + extraChangeSpeed <= maxSpeed) {
             input.value = parseFloat(input.value) + extraChangeSpeed
             await videoSpeedControl(input.value)
         }
