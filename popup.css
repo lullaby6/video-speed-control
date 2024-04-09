@@ -57,7 +57,7 @@ button {
     border: none;
     color: #fff;
     cursor: pointer;
-    padding: 5px 10px;
+    padding: 2.5px 5px;
     font-size: 18px;
     border-radius: 2.5px;
     -webkit-border-radius: 2.5px;
@@ -75,7 +75,15 @@ button {
     translate: -2.5px 0;
 }
 
+#extra-prev:hover {
+    translate: -2.5px 0;
+}
+
 #next:hover {
+    translate: 2.5px 0;
+}
+
+#extra-next:hover {
     translate: 2.5px 0;
 }
 

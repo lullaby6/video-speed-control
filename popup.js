@@ -1,5 +1,6 @@
 let speed = 1
 let changeSpeed = 0.125
+let extraChangeSpeed = 1
 let minSpeed = changeSpeed
 let maxSpeed = 10
 
@@ -19,7 +20,9 @@ async function videoSpeedControl(speed) {
 
 document.addEventListener('DOMContentLoaded', async () => {
     const prevButton = document.querySelector('#prev')
+    const extraPrevButton = document.querySelector('#extra-prev')
     const nextButton = document.querySelector('#next')
+    const extraNextButton = document.querySelector('#extra-next')
     const input = document.querySelector('input')
 
     prevButton.addEventListener('click', async () => {
@@ -29,9 +32,23 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
     })
 
+    extraPrevButton.addEventListener('click', async () => {
+        if (input.value > minSpeed + extraChangeSpeed) {
+            input.value = parseFloat(input.value) - extraChangeSpeed
+            await videoSpeedControl(input.value)
+        }
+    })
+
     nextButton.addEventListener('click', async () => {
         if (input.value < maxSpeed) {
             input.value = parseFloat(input.value) + changeSpeed
+            await videoSpeedControl(input.value)
+        }
+    })
+
+    extraNextButton.addEventListener('click', async () => {
+        if (input.value < maxSpeed - extraChangeSpeed) {
+            input.value = parseFloat(input.value) + extraChangeSpeed
             await videoSpeedControl(input.value)
         }
     })
