@@ -8,4 +8,4 @@ A Chromium Extension for control video's speed
 
 ## Download
 
-![Click Me](https://github.com/lullaby6/video-speed-control/archive/refs/tags/v1.0.0.zip) to download the extension
+[Click Me](https://github.com/lullaby6/video-speed-control/archive/refs/tags/v1.0.0.zip) to download the extension
