@@ -7,10 +7,12 @@ let maxSpeed = 10
 async function videoSpeedControl(speed) {
     let [tab] = await chrome.tabs.query({ active: true, currentWindow: true })
 
-    chrome.scripting.executeScript({
+    await chrome.scripting.executeScript({
         target: { tabId: tab.id },
         args: [speed],
         func: (speed) => {
+            document.body.setAttribute('video-speed-control', speed)
+
             document.querySelectorAll('video').forEach(video => {
                 video.playbackRate = speed
             })
@@ -24,6 +26,23 @@ document.addEventListener('DOMContentLoaded', async () => {
     const nextButton = document.querySelector('#next')
     const extraNextButton = document.querySelector('#extra-next')
     const input = document.querySelector('input')
+
+    let [tab] = await chrome.tabs.query({ active: true, currentWindow: true })
+
+    const inputValue = await chrome.scripting.executeScript({
+        target: { tabId: tab.id },
+        func: () => {
+            if (document.body.hasAttribute('video-speed-control')) {
+                return document.body.getAttribute('video-speed-control')
+            }
+
+            return 1
+        },
+    })
+
+    if (inputValue[0].result) {
+        input.value = inputValue[0].result
+    }
 
     prevButton.addEventListener('click', async () => {
         if (input.value > minSpeed) {
